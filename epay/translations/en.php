@@ -2,7 +2,7 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{epay}prestashop>epay_d26ff06a21662e7c2df72a0b30085cc7'] = 'Accept online payments quick and secure by Bambora Online ePay';
+$_MODULE['<{epay}prestashop>epay_d26ff06a21662e7c2df72a0b30085cc7'] = 'Accept online payments quick and secure by ePay Payment Solutions';
 $_MODULE['<{epay}prestashop>epay_8eb586bacbf2071c2839adfec6352521'] = 'You must have SoapClient installed to use Remote API. Contact your hosting provider for further information.';
 $_MODULE['<{epay}prestashop>epay_dac9b1014496385a9b24edb85cea7e24'] = 'You must set Remote API password to use payment requests. Remember to set the password in the ePay administration under the menu API / Webservices -> Access.';
 $_MODULE['<{epay}prestashop>epay_b393cc6b2b701137cf6411b6d2922c15'] = 'Merchantnumber is required. If you don\'t have one please contact ePay on support@epay.dk in order to obtain one!';
@@ -42,7 +42,7 @@ $_MODULE['<{epay}prestashop>epay_34f5759d35725fea3a4e7396146fc17d'] = 'Close tra
 $_MODULE['<{epay}prestashop>epay_e80592d6eed1cd99117bbf627f702db1'] = 'Do you want to credit:';
 $_MODULE['<{epay}prestashop>epay_0a90b1bc4078f74b6f0d117ec7df65af'] = 'Credit';
 $_MODULE['<{epay}prestashop>epay_5fe6005bf6e415c950c011fb65f12b8f'] = 'Deleted';
-$_MODULE['<{epay}prestashop>epay_5eb7d28ee839b1c04419b2725cb15b79'] = 'Go to Bambora Online ePay Administration';
+$_MODULE['<{epay}prestashop>epay_5eb7d28ee839b1c04419b2725cb15b79'] = 'Go to ePay Payment Solutions Administration';
 $_MODULE['<{epay}prestashop>epay_7496ee7bd59bc6ba7817b0b72e755532'] = 'An issue occured, and the operation was not performed.';
 $_MODULE['<{epay}prestashop>epay_e669421826b5b58ffe5438f5b0f311a8'] = 'Inputfield is not a valid number';
 $_MODULE['<{epay}prestashop>epay_cfd25193760d20fe605312b49d4c4a94'] = 'The Payment was captured successfully';
@@ -60,10 +60,10 @@ $_MODULE['<{epay}prestashop>epay_b2f40690858b404ed10e62bdf422c704'] = 'Amount';
 $_MODULE['<{epay}prestashop>epay_a150bc869e44e5e2ec66140ef696cf3d'] = 'Send payment request';
 $_MODULE['<{epay}prestashop>epay_c502cc604d97e6c5ef2d4f5ff9349870'] = 'Payment request is sent.';
 $_MODULE['<{epay}prestashop>payment_e2b7dec8fa4b498156dfee6e4c84b156'] = 'This payment method is not available.';
-$_MODULE['<{epay}prestashop>payment17_a352cf8cefa10ba322d75c127c10d846'] = ' Thank you for using Bambora Online ePay';
+$_MODULE['<{epay}prestashop>payment17_a352cf8cefa10ba322d75c127c10d846'] = ' Thank you for using ePay Payment Solutions';
 $_MODULE['<{epay}prestashop>payment17_25e8f2fd2871c8423bbe4e254066cd98'] = 'Please wait...';
 $_MODULE['<{epay}prestashop>paymenterror17_cb06d02bb15602bbfe360b853d7bcede'] = 'Your payment failed because of';
 $_MODULE['<{epay}prestashop>paymenterror17_aa422ac7191488238abd6ab1e7230151'] = 'Please contact the shop to correct the error and complete your payment.';
 $_MODULE['<{epay}prestashop>paymenterror_cb06d02bb15602bbfe360b853d7bcede'] = 'Your payment failed because of';
 $_MODULE['<{epay}prestashop>paymenterror_aa422ac7191488238abd6ab1e7230151'] = 'Please contact the shop to correct the error and complete your payment.';
-$_MODULE['<{epay}prestashop>paymentinfo_a1f073eb10f413def4b11ee4424cadcb'] = 'You have chosen to pay for the order online. Once you have completed your order, you will be transferred to the Bambora Online ePay. Here you need to process your payment. Once payment is completed, you will automatically be returned to our shop.';
+$_MODULE['<{epay}prestashop>paymentinfo_a1f073eb10f413def4b11ee4424cadcb'] = 'You have chosen to pay for the order online. Once you have completed your order, you will be transferred to the ePay Payment Solutions. Here you need to process your payment. Once payment is completed, you will automatically be returned to our shop.';

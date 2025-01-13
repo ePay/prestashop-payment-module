@@ -2,7 +2,7 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{epay}prestashop>epay_d26ff06a21662e7c2df72a0b30085cc7'] = 'Modtag online betalinger hurtigt og sikkert med Bambora Online ePay';
+$_MODULE['<{epay}prestashop>epay_d26ff06a21662e7c2df72a0b30085cc7'] = 'Modtag online betalinger hurtigt og sikkert med ePay Payment Solutions';
 $_MODULE['<{epay}prestashop>epay_8eb586bacbf2071c2839adfec6352521'] = 'Du skal have en SOAP klient indstalleret for at bruge Remote API. Kontakt din hosting udbyder for mere information.';
 $_MODULE['<{epay}prestashop>epay_dac9b1014496385a9b24edb85cea7e24'] = 'Hvis du i ePay Administrationen (API/Webservices -> Adgang) har sat et kodeord til webservice, skal du indtaste dette her.';
 $_MODULE['<{epay}prestashop>epay_b393cc6b2b701137cf6411b6d2922c15'] = 'Forretningsnummer er påkrævet. Hvis du ikke har et, kontakt venligst ePay (support@epay.dk).';
@@ -42,7 +42,7 @@ $_MODULE['<{epay}prestashop>epay_34f5759d35725fea3a4e7396146fc17d'] = 'Luk trans
 $_MODULE['<{epay}prestashop>epay_e80592d6eed1cd99117bbf627f702db1'] = 'Vil du kreditere:';
 $_MODULE['<{epay}prestashop>epay_0a90b1bc4078f74b6f0d117ec7df65af'] = 'Kreditér';
 $_MODULE['<{epay}prestashop>epay_5fe6005bf6e415c950c011fb65f12b8f'] = 'Slettet';
-$_MODULE['<{epay}prestashop>epay_5eb7d28ee839b1c04419b2725cb15b79'] = 'Gå til Bambora Online ePay Administration';
+$_MODULE['<{epay}prestashop>epay_5eb7d28ee839b1c04419b2725cb15b79'] = 'Gå til ePay Payment Solutions Administration';
 $_MODULE['<{epay}prestashop>epay_7496ee7bd59bc6ba7817b0b72e755532'] = 'En fejl er opstået og operationen blev ikke gennemført';
 $_MODULE['<{epay}prestashop>epay_e669421826b5b58ffe5438f5b0f311a8'] = 'Indput feltet indeholder ikke et validt nummer';
 $_MODULE['<{epay}prestashop>epay_cfd25193760d20fe605312b49d4c4a94'] = 'Betalingen er hævet';
@@ -60,10 +60,10 @@ $_MODULE['<{epay}prestashop>epay_b2f40690858b404ed10e62bdf422c704'] = 'Beløb';
 $_MODULE['<{epay}prestashop>epay_a150bc869e44e5e2ec66140ef696cf3d'] = 'Send betalingsanmodning';
 $_MODULE['<{epay}prestashop>epay_c502cc604d97e6c5ef2d4f5ff9349870'] = 'Betalingsanmodning er sendt.';
 $_MODULE['<{epay}prestashop>payment_e2b7dec8fa4b498156dfee6e4c84b156'] = 'Betalings metoden er ikke tilgængelig';
-$_MODULE['<{epay}prestashop>payment17_a352cf8cefa10ba322d75c127c10d846'] = 'Tak fordi du valgte at bruge Bambora Online ePay';
+$_MODULE['<{epay}prestashop>payment17_a352cf8cefa10ba322d75c127c10d846'] = 'Tak fordi du valgte at bruge ePay Payment Solutions';
 $_MODULE['<{epay}prestashop>payment17_25e8f2fd2871c8423bbe4e254066cd98'] = 'Vent venligst...';
 $_MODULE['<{epay}prestashop>paymenterror17_cb06d02bb15602bbfe360b853d7bcede'] = 'Din betaling fejlede fordi';
 $_MODULE['<{epay}prestashop>paymenterror17_aa422ac7191488238abd6ab1e7230151'] = 'Tag venligst kontakt til butikken for at få rettet fejlen og gennemført til betaling';
 $_MODULE['<{epay}prestashop>paymenterror_cb06d02bb15602bbfe360b853d7bcede'] = 'Din betaling fejlede fordi';
 $_MODULE['<{epay}prestashop>paymenterror_aa422ac7191488238abd6ab1e7230151'] = 'Tag venligst kontakt til butikken for at få rettet fejlen og gennemført til betaling';
-$_MODULE['<{epay}prestashop>paymentinfo_a1f073eb10f413def4b11ee4424cadcb'] = 'Du har valgt at betale for ordren online. Lige så snart du har gennemført din ordre, vil du blive overført til Bambora Online ePay. Her skal du gennemføre din betaling. Når betalingen er gennemført, vil du automatisk blive sendt tilbage til vores forretning.';
+$_MODULE['<{epay}prestashop>paymentinfo_a1f073eb10f413def4b11ee4424cadcb'] = 'Du har valgt at betale for ordren online. Lige så snart du har gennemført din ordre, vil du blive overført til ePay Payment Solutions. Her skal du gennemføre din betaling. Når betalingen er gennemført, vil du automatisk blive sendt tilbage til vores forretning.';

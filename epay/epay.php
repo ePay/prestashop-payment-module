@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Copyright (c) 2019. All rights reserved ePay A/S (a Bambora Company).
+ * Copyright (c) 2025. All rights reserved ePay A/S.
  *
  * This program is free software. You are allowed to use the software but NOT allowed to modify the software.
  * It is also not legal to do any changes to the software and distribute it in your own name / brand.
  *
  * All use of the payment modules happens at your own risk. We offer a free test account that you can use to test the module.
  *
- * @author    ePay A/S (a Bambora Company)
- * @copyright Bambora (http://bambora.com) (http://www.epay.dk)
- * @license   ePay A/S (a Bambora Company)
+ * @author    ePay A/S
+ * @copyright ePay A/S (https://www.epay.dk)
+ * @license   ePay A/S
  */
 include 'lib/epayTools.php';
 include 'lib/epayApi.php';
@@ -22,7 +22,7 @@ if (!defined('_PS_VERSION_')) {
 
 class EPay extends PaymentModule
 {
-    const MODULE_VERSION = '5.1.2';
+    const MODULE_VERSION = '5.1.3';
 
     const V15 = '15';
 
@@ -33,8 +33,8 @@ class EPay extends PaymentModule
     public function __construct()
     {
         $this->name = 'epay';
-        $this->version = '5.1.2';
-        $this->author = 'Bambora Online';
+        $this->version = '5.1.3';
+        $this->author = 'ePay Payment Solutions';
         $this->tab = 'payments_gateways';
 
         $this->ps_versions_compliancy = array('min' => '1.5', 'max' => _PS_VERSION_);
@@ -52,9 +52,9 @@ class EPay extends PaymentModule
 
         parent::__construct();
 
-        $this->displayName = 'Bambora Online ePay';
+        $this->displayName = 'ePay Payment Solutions';
         $this->description = $this->l(
-            'Accept online payments quick and secure by Bambora Online ePay'
+            'Accept online payments quick and secure by ePay Payment Solutions'
         );
 
         if ((Configuration::get('EPAY_ENABLE_REMOTE_API') == 1 || Configuration::get(
@@ -986,7 +986,7 @@ class EPay extends PaymentModule
         $paymentWindowJsUrl = 'https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/paymentwindow.js';
         $callToActionText = Tools::strlen(
             Configuration::get('EPAY_TITLE')
-        ) > 0 ? Configuration::get('EPAY_TITLE') : 'Bambora Online ePay';
+        ) > 0 ? Configuration::get('EPAY_TITLE') : 'ePay Payment Solutions';
 
         $paymentData = array(
             'epayPaymentWindowJsUrl' => $paymentWindowJsUrl,
@@ -1032,7 +1032,7 @@ class EPay extends PaymentModule
 
         $callToActionText = Tools::strlen(
             Configuration::get('EPAY_TITLE')
-        ) > 0 ? Configuration::get('EPAY_TITLE') : 'Bambora Online ePay';
+        ) > 0 ? Configuration::get('EPAY_TITLE') : 'ePay Payment Solutions';
 
         $epayPaymentOption = new PrestaShop\PrestaShop\Core\Payment\PaymentOption();
         $epayPaymentOption->setCallToActionText($callToActionText)
@@ -1165,7 +1165,7 @@ class EPay extends PaymentModule
 
                 if (!$containPaymentWithTransactionId) {
                     $html .= '<div class="card-header"> ';
-                    $html .= '<h3 class="card-header">Bambora Online ePay Payment Request</h3>';
+                    $html .= '<h3 class="card-header">ePay Payment Request</h3>';
                     $html .= '<div class="card-body"> ';
                     if (Tools::isSubmit('sendpaymentrequest')) {
                         $html .= $this->createPaymentRequest($order);
@@ -1643,7 +1643,7 @@ class EPay extends PaymentModule
         $html = '';
         if ($this->getPsVersion() === $this::V15) {
             $html .= '<style type="text/css">.table td{white-space:nowrap;overflow-x:auto;}</style>';
-            $html .= '<br /><fieldset><legend><img src="../img/admin/money.gif">Bambora Online ePay</legend>';
+            $html .= '<br /><fieldset><legend><img src="../img/admin/money.gif">ePay Payment Solutions</legend>';
         } else {
             $html .= '<div class="row" >';
             $html .= '<div class="col-lg-12">';
@@ -1653,13 +1653,13 @@ class EPay extends PaymentModule
         if ($this->isPsVersionHigherThan177()) {
             $html = '<div class="card mt-2"><div class="card-header"> <h3 class="card-header-title">';
 
-            $html .= "Bambora Online ePay";
+            $html .= "ePay Payment Solutions";
 
             $html .= '</h3></div>';
         } else {
             $html .= '<div class="panel-heading epay_admin_heading">';
-            $html .= '<img src="../modules/' . $this->name . '/views/img/logo_small.png" />';
-            $html .= '<span>Bambora Online ePay</span></div>';
+            $html .= '<img src="../modules/' . $this->name . '/views/img/epay_small.png" />';
+            $html .= '<span>ePay Payment Solutions</span></div>';
         }
 
         return $html;
@@ -1774,7 +1774,7 @@ class EPay extends PaymentModule
             if ($fraud) {
                 $html .= $this->transactionInfoTableRow(
                     $this->l('Fraud'),
-                    '<span class="epay_fraud"><img src="../img/admin/bullet_red.png" />' . $this->l(
+                    '<span class="epay_fraud"><img src="' . _PS_ADMIN_IMG_ . 'warning.gif" />' . $this->l(
                         'Suspicious Payment!'
                     ) . '</span>'
                 );
@@ -1798,7 +1798,7 @@ class EPay extends PaymentModule
                 }
             }
             $paymentTypeNameHtml .= '</div>';
-            $paymentTypeIconHtml = '<img src="https://d25dqh6gpkyuw6.cloudfront.net/paymentlogos/external/' . $cardTypeId . '.png" alt="' . $cardName . '" title="' . $cardName . '" />';
+            $paymentTypeIconHtml = '<img src="https://cdn.epay.eu/paymentlogos/external/' . $cardTypeId . '.png" alt="' . $cardName . '" title="' . $cardName . '" />';
 
             $paymentTypeColumn = '<div class="epay_paymenttype">' . $paymentTypeNameHtml . $paymentTypeIconHtml . '</div>';
 
@@ -1878,6 +1878,12 @@ class EPay extends PaymentModule
 
             $historyArray = $epayTransaction->history->TransactionHistoryInfo;
 
+            if($historyArray instanceof stdClass)
+            {
+                $historyArray = array($epayTransaction->history->TransactionHistoryInfo);
+            }
+            
+            /*
             if (!array_key_exists(
                 0,
                 $epayTransaction->history->TransactionHistoryInfo
@@ -1885,6 +1891,7 @@ class EPay extends PaymentModule
                 $historyArray = array($epayTransaction->history->TransactionHistoryInfo);
                 // convert to array
             }
+            */
 
             for ($i = 0; $i < count($historyArray); $i++) {
                 $html .= '<tr><td>' . str_replace(
@@ -2057,9 +2064,9 @@ class EPay extends PaymentModule
      */
     private function buildLogodiv()
     {
-        $text = $this->l('Go to Bambora Online ePay Administration');
+        $text = $this->l('Go to ePay Administration');
         $html = '<a href="https://admin.ditonlinebetalingssystem.dk/admin/login.asp" alt="" title="' . $text . '" target="_blank">';
-        $html .= '<img class="bambora-logo" src="https://d3r1pwhfz7unl9.cloudfront.net/bambora/bambora-logo.svg" width="150px;" />';
+        $html .= '<img class="bambora-logo" src="/modules/' . $this->name . '/views/img/epay-logo.svg" width="150px;" />';
         $html .= '</a>';
         $html .= '<div><a href="https://admin.ditonlinebetalingssystem.dk/admin/login.asp"  alt="" title="' . $text . '" target="_blank">' . $text . '</a></div>';
 
@@ -2359,7 +2366,7 @@ class EPay extends PaymentModule
         $msg = new Message();
         $message = strip_tags($message, '<br>');
         if (Validate::isCleanHtml($message)) {
-            $msg->name = 'Bambora Online ePay';
+            $msg->name = 'ePay Payment Solutions';
             $msg->message = $message;
             $msg->id_order = (int)$orderId;
             $msg->private = 1;
@@ -2676,7 +2683,7 @@ class EPay extends PaymentModule
 
     public function writeLogEntry($message, $severity)
     {
-        if ($this->getPsVersion() === Bambora::V15) {
+        if ($this->getPsVersion() === EPay::V15) {
             Logger::addLog($message, $severity);
         } else {
             PrestaShopLogger::addLog($message, $severity);
