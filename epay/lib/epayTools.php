@@ -190,7 +190,7 @@ class EpayTools
      *
      * @return mixed
      */
-    public function getPhoneNumber($address)
+    public static function getPhoneNumber($address)
     {
         if ($address->phone_mobile != '' || $address->phone != '') {
             return $address->phone_mobile != '' ? $address->phone_mobile : $address->phone;
