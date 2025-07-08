@@ -22,7 +22,7 @@ if (!defined('_PS_VERSION_')) {
 
 class EPay extends PaymentModule
 {
-    const MODULE_VERSION = '5.1.3';
+    const MODULE_VERSION = '5.1.5';
 
     const V15 = '15';
 
@@ -33,7 +33,7 @@ class EPay extends PaymentModule
     public function __construct()
     {
         $this->name = 'epay';
-        $this->version = '5.1.3';
+        $this->version = '5.1.5';
         $this->author = 'ePay Payment Solutions';
         $this->tab = 'payments_gateways';
 
@@ -87,7 +87,7 @@ class EPay extends PaymentModule
             || !$this->registerHook('footer')
             || !$this->registerHook('adminOrder')
             || !$this->registerHook('paymentReturn')
-            || !$this->registerHook('PDFInvoice')
+            // || !$this->registerHook('PDFInvoice')
             || !$this->registerHook('Invoice')
             || !$this->registerHook('backOfficeHeader')
             || !$this->registerHook('displayHeader')
@@ -2683,7 +2683,7 @@ class EPay extends PaymentModule
 
     public function writeLogEntry($message, $severity)
     {
-        if ($this->getPsVersion() === EPay::V15) {
+        if ($this->getPsVersion() === $this::V15) {
             Logger::addLog($message, $severity);
         } else {
             PrestaShopLogger::addLog($message, $severity);
