@@ -10,3 +10,5 @@ epay/config_sv.xml
 tags
 
 epay.zip
+
+.gitignore
