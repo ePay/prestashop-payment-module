@@ -22,7 +22,7 @@ if (!defined('_PS_VERSION_')) {
 
 class EPay extends PaymentModule
 {
-    const MODULE_VERSION = '5.1.5';
+    const MODULE_VERSION = '5.1.6';
 
     const V15 = '15';
 
@@ -33,7 +33,7 @@ class EPay extends PaymentModule
     public function __construct()
     {
         $this->name = 'epay';
-        $this->version = '5.1.5';
+        $this->version = '5.1.6';
         $this->author = 'ePay Payment Solutions';
         $this->tab = 'payments_gateways';
 
@@ -80,7 +80,8 @@ class EPay extends PaymentModule
 
     public function install()
     {
-        if (!parent::install()
+        if (
+            !parent::install()
             || !$this->registerHook('payment')
             || !$this->registerHook('rightColumn')
             || !$this->registerHook('leftColumn')
@@ -88,7 +89,7 @@ class EPay extends PaymentModule
             || !$this->registerHook('adminOrder')
             || !$this->registerHook('paymentReturn')
             // || !$this->registerHook('PDFInvoice')
-            || !$this->registerHook('Invoice')
+            // || !$this->registerHook('Invoice')
             || !$this->registerHook('backOfficeHeader')
             || !$this->registerHook('displayHeader')
             || !$this->registerHook('actionOrderStatusPostUpdate')
@@ -96,19 +97,15 @@ class EPay extends PaymentModule
         ) {
             return false;
         }
-        if ($this->getPsVersion() === $this::V17) {
-            if (!$this->registerHook('paymentOptions')) {
+
+        if (version_compare(_PS_VERSION_, '1.7.0.0', '>=')) {
+            if (
+                !$this->registerHook('paymentOptions')
+            ) {
                 return false;
             }
         }
-        if ($this->getPsVersion() === $this::V17) {
-            if (!$this->registerHook('displayAdminOrderSideBottom')) {
-                return false;
-            }
-            if (!$this->registerHook('displayAdminOrderMainBottom')) {
-                return false;
-            }
-        }
+
         if (!$this->createEPayTransactionTable()) {
             return false;
         }
@@ -534,7 +531,12 @@ class EPay extends PaymentModule
         $helper->module = $this;
         $helper->name_controller = $this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
-        $helper->currentIndex = AdminController::$currentIndex . '&configure=' . $this->name;
+        $helper->currentIndex = $this->context->link->getAdminLink(
+            'AdminModules',
+            false,
+            [],
+            ['configure' => $this->name]
+        );
 
         // Language
         $helper->default_form_language = $default_lang;
@@ -545,19 +547,25 @@ class EPay extends PaymentModule
         $helper->show_toolbar = true;        // false -> remove toolbar
         $helper->toolbar_scroll = true;      // yes - > Toolbar is always visible on the top of the screen.
         $helper->submit_action = 'submit' . $this->name;
-        $helper->toolbar_btn = array(
-            'save' => array(
+
+        $helper->toolbar_btn = [
+            'save' => [
                 'desc' => $this->l('Save'),
-                'href' => AdminController::$currentIndex . '&configure=' . $this->name . '&save' . $this->name .
-                    '&token=' . Tools::getAdminTokenLite('AdminModules'),
-            ),
-            'back' => array(
-                'href' => AdminController::$currentIndex . '&token=' . Tools::getAdminTokenLite(
-                        'AdminModules'
-                    ),
+                'href' => $this->context->link->getAdminLink(
+                    'AdminModules',
+                    true, // med token
+                    [],
+                    [
+                        'configure'          => $this->name,
+                        'save' . $this->name => 1,
+                    ]
+                ),
+            ],
+            'back' => [
+                'href' => $this->context->link->getAdminLink('AdminModules', true),
                 'desc' => $this->l('Back to list'),
-            ),
-        );
+            ],
+        ];
 
         // Load current value
         $helper->fields_value['EPAY_MERCHANTNUMBER'] = Configuration::get(
@@ -1817,7 +1825,7 @@ class EPay extends PaymentModule
 
             $html .= $this->transactionInfoTableRow(
                 $this->l('Authorized amount'),
-                Tools::displayPrice($authorizedAmount)
+                EpayTools::formatPrice($authorizedAmount)
             );
         }
 
@@ -1845,7 +1853,7 @@ class EPay extends PaymentModule
             );
             $html .= $this->transactionInfoTableRow(
                 $this->l('Captured amount'),
-                Tools::displayPrice($capturedAmount)
+                EpayTools::formatPrice($capturedAmount)
             );
             $creditedAmount = EpayTools::convertPriceFromMinorUnits(
                 $epayTransaction->creditedamount,
@@ -1853,7 +1861,7 @@ class EPay extends PaymentModule
             );
             $html .= $this->transactionInfoTableRow(
                 $this->l('Credited amount'),
-                Tools::displayPrice($creditedAmount)
+                EpayTools::formatPrice($creditedAmount)
             );
             $html .= '</table>';
 

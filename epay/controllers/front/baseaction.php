@@ -152,12 +152,12 @@ abstract class BaseAction extends ModuleFrontController
                         }
                     }
 
-                    $id_order = Order::getOrderByCartId($id_cart);
-                    $this->module->addDbOrderIdToRecordedTransaction(
-                        $transaction_Id,
-                        $id_order
-                    );
-                    $order = new Order($id_order);
+                    $orderId = Order::getIdByCartId((int)$cart->id);
+                    if ($orderId) {
+                        $order = new Order($orderId);
+                    }
+
+                    // $order = new Order($id_order);
 
                     if ($isPaymentRequest) {
                         $message = 'Payment request succeded with ePay Transaction ID: ' . $transaction_Id;

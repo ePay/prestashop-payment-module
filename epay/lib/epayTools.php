@@ -246,6 +246,14 @@ class EpayTools
         return ($amount / pow(10, $minorunits));
     }
 
+
+    public static function formatPrice($amount)
+    {
+        $context = Context::getContext();
+        $currency = $context->currency;
+        return $context->getCurrentLocale()->formatPrice($amount, $currency->iso_code);
+    }
+
     /**
      * Get Currency MinorUnits.
      *

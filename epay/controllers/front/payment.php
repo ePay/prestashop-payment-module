@@ -12,11 +12,14 @@
  * @copyright Bambora (http://bambora.com) (http://www.epay.dk)
  * @license   ePay A/S (a Bambora Company)
  */
+/*
 class EpayPaymentModuleFrontController extends ModuleFrontController
 {
+*/
     /**
      * @see FrontController::postProcess()
      */
+    /*
     public function postProcess()
     {
         $cart = $this->context->cart;
@@ -56,6 +59,63 @@ class EpayPaymentModuleFrontController extends ModuleFrontController
         );
 
         $this->context->smarty->assign($paymentData);
+
+        $this->setTemplate('module:epay/views/templates/front/payment17.tpl');
+    }
+}
+*/
+
+class EpayPaymentModuleFrontController extends ModuleFrontController
+{
+    protected $paymentWindowRequest;
+
+    public function postProcess()
+    {
+        $cart = $this->context->cart;
+
+        if (
+            !$cart->id ||
+            !$cart->id_customer ||
+            !$cart->id_address_delivery ||
+            !$cart->id_address_invoice ||
+            !$this->module->active
+        ) {
+            Tools::redirect('index.php?controller=order&step=1');
+        }
+
+        // ensure module is allowed
+        $authorized = false;
+        foreach (Module::getPaymentModules() as $module) {
+            if ($module['name'] === $this->module->name) {
+                $authorized = true;
+                break;
+            }
+        }
+
+        if (!$authorized) {
+            die($this->module->l('This payment method is not available.', 'epay'));
+        }
+
+        // create ePay request
+        $this->paymentWindowRequest = $this->module->createPaymentWindowRequest($cart);
+
+        if (!$this->paymentWindowRequest) {
+            Tools::redirect('index.php?controller=order&step=1');
+        }
+    }
+
+    public function initContent()
+    {
+        parent::initContent();
+
+        $paymentWindowJsUrl = 'https://ssl.ditonlinebetalingssystem.dk/integration/ewindow/paymentwindow.js';
+
+        $this->context->smarty->assign([
+            'epayPaymentWindowJsUrl'   => $paymentWindowJsUrl,
+            'epayPaymentWindowRequest' => json_encode($this->paymentWindowRequest),
+            'epayCancelUrl'            => $this->paymentWindowRequest['epay_cancelurl'],
+            'epayWindowState'          => $this->paymentWindowRequest['epay_windowstate'],
+        ]);
 
         $this->setTemplate('module:epay/views/templates/front/payment17.tpl');
     }
