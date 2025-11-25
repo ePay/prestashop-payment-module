@@ -20,7 +20,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-class EPay extends PaymentModule
+class Epay extends PaymentModule
 {
     const MODULE_VERSION = '5.1.6';
 
@@ -225,6 +225,14 @@ class EPay extends PaymentModule
                     Tools::getValue('EPAY_WINDOWSTATE')
                 );
                 Configuration::updateValue(
+                    'EPAY_AGEVERIFICATIONMODE',
+                    Tools::getValue('EPAY_AGEVERIFICATIONMODE')
+                );
+                Configuration::updateValue(
+                    'EPAY_MINIMUMUSERAGE',
+                    Tools::getValue('EPAY_MINIMUMUSERAGE')
+                );
+                Configuration::updateValue(
                     'EPAY_WINDOWID',
                     Tools::getValue('EPAY_WINDOWID')
                 );
@@ -317,8 +325,22 @@ class EPay extends PaymentModule
         );
 
         $windowstate_options = array(
-            array('type' => 1, 'name' => 'Overlay'),
+            // array('type' => 1, 'name' => 'Overlay'),
             array('type' => 3, 'name' => 'Fullscreen'),
+        );
+
+        $ageverification_options = array(
+            array('type' => '0', 'name' => 'Disabled'),
+            array('type' => '1', 'name' => 'Enabled on all orders'),
+            array('type' => '2', 'name' => 'Enabled on DK orders'),
+        );
+
+        $minimumuserage_options = array(
+            array('type' => '0', 'name' => '0 Years'),
+            array('type' => '15', 'name' => '15 Years'),
+            array('type' => '16', 'name' => '16 Years'),
+            array('type' => '18', 'name' => '18 Years'),
+            array('type' => '21', 'name' => '21 Years'),
         );
 
         $displayPaymentLogoLocation = array(
@@ -364,6 +386,28 @@ class EPay extends PaymentModule
                     'required' => true,
                     'options' => array(
                         'query' => $windowstate_options,
+                        'id' => 'type',
+                        'name' => 'name',
+                    ),
+                ),
+                array(
+                    'type' => 'select',
+                    'label' => 'Ageverification mode',
+                    'name' => 'EPAY_AGEVERIFICATIONMODE',
+                    'required' => true,
+                    'options' => array(
+                        'query' => $ageverification_options,
+                        'id' => 'type',
+                        'name' => 'name',
+                    ),
+                ),
+                array(
+                    'type' => 'select',
+                    'label' => 'Minimum user age',
+                    'name' => 'EPAY_MINIMUMUSERAGE',
+                    'required' => true,
+                    'options' => array(
+                        'query' => $minimumuserage_options,
                         'id' => 'type',
                         'name' => 'name',
                     ),
@@ -573,6 +617,12 @@ class EPay extends PaymentModule
         );
         $helper->fields_value['EPAY_WINDOWSTATE'] = Configuration::get(
             'EPAY_WINDOWSTATE'
+        );
+        $helper->fields_value['EPAY_AGEVERIFICATIONMODE'] = Configuration::get(
+            'EPAY_AGEVERIFICATIONMODE'
+        );
+        $helper->fields_value['EPAY_MINIMUMUSERAGE'] = Configuration::get(
+            'EPAY_MINIMUMUSERAGE'
         );
         $helper->fields_value['EPAY_WINDOWID'] = Configuration::get('EPAY_WINDOWID');
         $helper->fields_value['EPAY_ENABLE_REMOTE_API'] = Configuration::get(
@@ -1399,6 +1449,12 @@ class EPay extends PaymentModule
         );
         $parameters['epay_cms'] = EpayTools::getModuleHeaderInfo();
         $parameters['epay_windowstate'] = Configuration::get('EPAY_WINDOWSTATE');
+
+        if(Configuration::get('EPAY_MINIMUMUSERAGE') > 0 && (Configuration::get('EPAY_AGEVERIFICATIONMODE') == 1 || (Configuration::get('EPAY_AGEVERIFICATIONMODE') == 2 && $this->getShippingCountryIso() == "DK")))
+        {
+            $parameters['minimumuserage'] = Configuration::get('EPAY_MINIMUMUSERAGE');
+            $parameters['ageverificationcountry'] = $this->getShippingCountryIso();
+        }
 
         if (Configuration::get('EPAY_WINDOWID')) {
             $parameters['epay_windowid'] = Configuration::get('EPAY_WINDOWID');
@@ -2698,4 +2754,11 @@ class EPay extends PaymentModule
         }
     }
     //endregion
+
+    private function getShippingCountryIso()
+    {
+        $address = new Address($this->context->cart->id_address_delivery);
+        $country = new Country($address->id_country);
+        return $country->iso_code;
+    }
 }
