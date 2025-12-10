@@ -1453,7 +1453,7 @@ class Epay extends PaymentModule
         if(Configuration::get('EPAY_MINIMUMUSERAGE') > 0 && (Configuration::get('EPAY_AGEVERIFICATIONMODE') == 1 || (Configuration::get('EPAY_AGEVERIFICATIONMODE') == 2 && $this->getShippingCountryIso() == "DK")))
         {
             $parameters['minimumuserage'] = Configuration::get('EPAY_MINIMUMUSERAGE');
-            $parameters['ageverificationcountry'] = $this->getShippingCountryIso();
+            $parameters['ageverificationcountry'] = null;
         }
 
         if (Configuration::get('EPAY_WINDOWID')) {
